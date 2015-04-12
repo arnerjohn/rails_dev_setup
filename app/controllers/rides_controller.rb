@@ -3,21 +3,20 @@ class RidesController < ApplicationController
   before_action :set_ride, only: [:show, :update, :destroy]
 
   def index
-    @ride = Ride.all
-    respond_with @ride
+    @rides = Ride.all
+    respond_with @rides
   end
 
   def show
-      respond_with @ride
+    respond_with @ride
   end
 
   def update
-      if @ride.update(ride_params)
-        respond_with @ride
-      else
-        respond_with @ride.errors
+    if @ride.update(ride_params)
+      respond_with @ride
+    else
+      respond_with @ride.errors
     end
-
   end
 
   def destroy
@@ -29,15 +28,12 @@ class RidesController < ApplicationController
   def create
     @ride = Ride.new(ride_params)
 
-      if @ride.save
-        respond_with @ride
-      else
-        respond_with @ride.errors
-
-      end
-
+    if @ride.save
+      respond_with @ride
+    else
+      respond_with @ride.errors
+    end
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -50,7 +46,6 @@ class RidesController < ApplicationController
       params.permit(:RideName, :RideSponsorId, :RideDate, :RideLaunchTime, :RideStartLocation, :RideLength, :RidePace, :RideTerrain, :RideLeader, :Description)
     end
 end
-
 
 # "RideName"
 # t.integer  "RideSponsorId"
