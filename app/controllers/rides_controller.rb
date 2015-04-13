@@ -4,11 +4,20 @@ class RidesController < ApplicationController
 
   def index
     @rides = Ride.all
-    respond_with @rides
+
+		respond_to do |format|
+			format.html { render :index }
+			format.json { render json: @rides }
+		end
   end
 
+	# What does this URL look like?
+	# /rides/27 aka /rides/:id ? 
   def show
-    respond_with @ride
+		respond_to do |format|
+			format.html { render :show }
+			format.json { render json: @ride }
+		end
   end
 
   def update
@@ -24,6 +33,10 @@ class RidesController < ApplicationController
 
     respond_with :success
   end
+
+	def new
+		@ride = Ride.new
+	end
 
   def create
     @ride = Ride.new(ride_params)
