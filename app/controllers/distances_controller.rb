@@ -1,16 +1,19 @@
 class DistancesController < ApplicationController
-  respond_to :json
   before_action :set_distance, only: [:show, :update, :destroy]
 
   def show
-    respond_with @distance
+    respond_to do |format|
+      format.json { render json: @distance }
+    end
   end
 
   def update
-    if @distance.update(distance_params)
-      respond_with @distance
-    else
-      respond_with @distance.errors
+    respond_to do |format|
+      if @distance.update(distance_params)
+        format.json { render json: @distance }
+      else
+        format.json { render json: @distance.errors }
+      end
     end
 
   end
@@ -18,17 +21,20 @@ class DistancesController < ApplicationController
   def destroy
     @distance.destroy
 
-    respond_with :success
+    respond_to do |format|
+      format.json { render json: :success }
+    end
   end
 
   def create
     @distance = Distance.new(distance_params)
+    respond_to do |format|
+      if @distance.save
+        format.json { render json: @distance }
+      else
+        format.json { render json: @distance.errors }
 
-    if @distance.save
-      respond_with @distance
-    else
-      respond_with @distance.errors
-
+      end
     end
 
   end

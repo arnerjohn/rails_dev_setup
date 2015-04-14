@@ -1,8 +1,8 @@
 class Rider < ActiveRecord::Base
-  before_create do |doc|
-    doc.api_key = doc.generate_api_key
-  end
 
+  has_one :api_key, dependent: :destroy
+
+  after_create :create_api_key
 
 	has_many :emergency_contacts
 	has_one :pel_profile
@@ -11,10 +11,11 @@ class Rider < ActiveRecord::Base
 	belongs_to :peloton
 
 
-  def generate_api_key
-    loop do
-      token = SecureRandom.base64.tr('+/=', 'Qrt')
-      break token unless Rider.exists?(api_key: token)
+
+  private
+
+    def create_api_key
+      ApiKey.create :rider => self
     end
-  end
+
 end
