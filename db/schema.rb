@@ -10,6 +10,7 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150412203345) do
 
   create_table "api_keys", force: true do |t|
@@ -25,6 +26,10 @@ ActiveRecord::Schema.define(version: 20150412203345) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+=======
+
+ActiveRecord::Schema.define(version: 20150412200820) do
+>>>>>>> 7da6a3f41b4cccc5aeb29639edb51cda2fbc0135
 
   create_table "cycling_profs", force: true do |t|
     t.integer  "CycID"
@@ -108,9 +113,6 @@ ActiveRecord::Schema.define(version: 20150412203345) do
     t.integer  "RideSponsorId"
     t.datetime "RideDate"
     t.datetime "RideLaunchTime"
-    t.string   "RideStartLocation"
-    t.string   "RideLength"
-    t.string   "RidePace"
     t.string   "RideTerrain"
     t.integer  "RideLeader"
     t.string   "Description"

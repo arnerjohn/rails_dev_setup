@@ -5,6 +5,7 @@ class RidesController < ApplicationController
   def index
     @rides = Ride.all
 
+<<<<<<< HEAD
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @rides }
@@ -18,6 +19,21 @@ class RidesController < ApplicationController
       format.html { render :show }
       format.json { render json: @ride }
     end
+=======
+		respond_to do |format|
+			format.html { render :index }
+			format.json { render json: @rides }
+		end
+  end
+
+	# What does this URL look like?
+	# /rides/27 aka /rides/:id ? 
+  def show
+		respond_to do |format|
+			format.html { render :show }
+			format.json { render json: @ride }
+		end
+>>>>>>> 7da6a3f41b4cccc5aeb29639edb51cda2fbc0135
   end
 
   def update
@@ -34,9 +50,15 @@ class RidesController < ApplicationController
     respond_with :success
   end
 
+<<<<<<< HEAD
   def new
     @ride = Ride.new
   end
+=======
+	def new
+		@ride = Ride.new
+	end
+>>>>>>> 7da6a3f41b4cccc5aeb29639edb51cda2fbc0135
 
   def create
     @ride = Ride.new(ride_params)

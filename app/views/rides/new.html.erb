@@ -1,0 +1,35 @@
+<%= form_for(@ride, html: {class: "form-horizontal"}) do |f| %>
+	<fieldset>
+		<div class="form-group">
+			<%= f.label :RideSponsorId, "Ride Sponsor ID", class: "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.number_field :RideSponsorId, class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :RideDate, "Ride Date", class: "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.date_field :RideDate, class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="form-group">
+		<%= f.label :RideLaunchTime, "Ride Launch Time", class: "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.time_field :RideLaunchTime, class: "form-control" %>
+			</div>
+		</div>
+
+		<%# We need to verify what is going on with the RideStartLocation %>
+		<%# Is it a separate model that is related to the Ride model? %>
+		<%# <%= f.label :RideStartLocation, "Ride Start Location" %1> %>
+		<%# <%= f.text_field :RideStartLocation %1> %>
+
+		<div class="form-group">
+			<div class="col-lg-10 col-lg-offset-2">
+				<%= f.submit "Create Ride", class: "btn btn-primary" %>
+			</div>
+		</div>
+	</fieldset>
+<% end %>	

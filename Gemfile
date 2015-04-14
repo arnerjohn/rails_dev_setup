@@ -4,7 +4,9 @@ gem 'rails-api'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+group :test, :development do
+	gem 'sqlite3'
+end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -45,3 +47,8 @@ gem 'bootstrap-material-design', git: 'https://github.com/tarebyte/bootstrap-mat
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :production do
+	gem 'pg'
+	gem 'rails_12factor'
+	gem 'puma'
+end
