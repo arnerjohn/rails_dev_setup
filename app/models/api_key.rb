@@ -4,6 +4,10 @@ class ApiKey < ActiveRecord::Base
 
   belongs_to :rider
 
+  def get_rider_id
+    self.rider_id
+  end
+
   private
 
   def generate_access_token
