@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails-api'
+# gem 'rails-api'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.2.0'
+gem 'responders', '~> 2.0'
+
 # Use sqlite3 as the database for Active Record
 group :test, :development do
 	gem 'sqlite3'

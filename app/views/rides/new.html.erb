@@ -1,5 +1,13 @@
+<h1>Create a Ride</h1>
 <%= form_for(@ride, html: {class: "form-horizontal"}) do |f| %>
 	<fieldset>
+		<div class="form-group">
+			<%= f.label :RideName, "Ride Name", class: "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.text_field :RideName, class: "form-control" %>
+			</div>
+		</div>
+
 		<div class="form-group">
 			<%= f.label :RideSponsorId, "Ride Sponsor ID", class: "col-lg-2 control-label" %>
 			<div class="col-lg-10">
@@ -18,6 +26,28 @@
 		<%= f.label :RideLaunchTime, "Ride Launch Time", class: "col-lg-2 control-label" %>
 			<div class="col-lg-10">
 				<%= f.time_field :RideLaunchTime, class: "form-control" %>
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<%= f.label :RideTerrain, "Ride Terrain", class: "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.text_field :RideTerrain, class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :RideLeader, "Rode Leader", class: "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.number_field :RideLeader, class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :Description, "Ride Description", class: "col-lg-2 control-label" %>
+			<div class="col-lg-10">
+				<%= f.text_field :Description, class: "form-control" %>
 			</div>
 		</div>
 

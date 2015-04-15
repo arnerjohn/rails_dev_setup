@@ -12,13 +12,14 @@ class RidesController < ApplicationController
     end
   end
 
-	# What does this URL look like?
-	# /rides/27 aka /rides/:id ? 
+	# HTML /rides/:id
+	# JSON /api/v1/rides/:id
   def show
-	respond_to do |format|
-		format.html { render :show }
-		format.json { render json: @ride }
-	end
+		@ride = Ride.find(params[:id])
+		respond_to do |format|
+			format.html
+			format.json { render json: @ride }
+		end
   end
 
   def update
@@ -43,9 +44,19 @@ class RidesController < ApplicationController
     @ride = Ride.new(ride_params)
 
     if @ride.save
-      respond_with @ride
+			flash[:success] = "Ride Successfully created"
+			respond_to do |format|
+				format.html { redirect_to @ride }
+				format.json { render json: @ride }
+			end
+      # respond_with @ride
     else
-      respond_with @ride.errors
+			flash[:error] = "Unable to create ride"
+			respond_to do |format|
+				format.html { render "new" }
+				format.json { render json: @ride.errors }
+			end
+      # respond_with @ride.errors
     end
   end
 
@@ -57,7 +68,7 @@ class RidesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def ride_params
-    params.permit(:RideName, :RideSponsorId, :RideDate, :RideLaunchTime, :RideStartLocation, :RideLength, :RidePace, :RideTerrain, :RideLeader, :Description)
+    params.require(:ride).permit(:RideName, :RideSponsorId, :RideDate, :RideLaunchTime, :RideStartLocation, :RideLength, :RidePace, :RideTerrain, :RideLeader, :Description)
   end
 end
 
