@@ -5,7 +5,7 @@ class Rider < ActiveRecord::Base
   after_create :create_api_key
 
 	has_many :emergency_contacts
-	has_one :pel_profile
+	has_one :pelotonia_profile
 	has_one :cycling_prof
 	belongs_to :ride
 	belongs_to :peloton

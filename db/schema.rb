@@ -11,103 +11,84 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413212012) do
+ActiveRecord::Schema.define(version: 20150416010641) do
 
-  create_table "api_keys", force: true do |t|
-    t.string   "access_token"
-    t.string   "user_id"
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "access_token", limit: 255
+    t.string   "user_id",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "cycling_profs", force: true do |t|
-    t.integer  "CycID"
-    t.string   "Type"
-    t.string   "PacePref"
-    t.integer  "YearStarted"
-    t.integer  "PrefGroup"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "cycling_profiles", force: :cascade do |t|
+    t.integer "rider_id"
+    t.string  "genre"
+    t.string  "pace_preference"
+    t.date    "year_started"
+    t.string  "group_preference"
   end
 
-  create_table "distances", force: true do |t|
-    t.integer  "RideID"
-    t.float    "Distance"
+  create_table "emergency_contacts", force: :cascade do |t|
+    t.string   "full_name",    limit: 255
+    t.string   "relationship", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rider_id"
+    t.string   "phone"
   end
 
-  create_table "emergency_contacts", force: true do |t|
-    t.integer  "EID"
-    t.string   "Name"
-    t.integer  "Phone"
-    t.string   "Relationship"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  add_index "emergency_contacts", ["rider_id"], name: "index_emergency_contacts_on_rider_id"
+
+  create_table "pelotonia_profiles", force: :cascade do |t|
+    t.integer "rider_id"
+    t.integer "years_ridden"
+    t.boolean "living_proof", default: false
+    t.boolean "high_roller",  default: false
+    t.boolean "scholar",      default: false
+    t.boolean "pace_setter",  default: false
+    t.boolean "road_lead",    default: false
+    t.boolean "ground_lead",  default: false
   end
 
-  create_table "locations", force: true do |t|
-    t.integer  "RideID"
-    t.string   "RideLocation"
+  add_index "pelotonia_profiles", ["rider_id"], name: "index_pelotonia_profiles_on_rider_id"
+
+  create_table "pelotons", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "website_url", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rider_id"
   end
 
-  create_table "paces", force: true do |t|
-    t.integer  "RideID"
-    t.string   "Pace"
+  add_index "pelotons", ["rider_id"], name: "index_pelotons_on_rider_id"
+
+  create_table "riders", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "age"
+    t.string   "address_1",  limit: 255
+    t.string   "address_2",  limit: 255
+    t.string   "city",       limit: 255
+    t.string   "state",      limit: 255
+    t.integer  "zip_code"
+    t.string   "region",     limit: 255
+    t.string   "email",      limit: 255
+    t.integer  "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "api_key",    limit: 255
   end
 
-  create_table "pel_profiles", force: true do |t|
-    t.integer  "RiderID"
-    t.integer  "YearsRidden"
-    t.boolean  "LivingProof"
-    t.boolean  "HighRoller"
-    t.boolean  "Scholar"
-    t.boolean  "PaceSetter"
-    t.boolean  "RoadLead"
-    t.boolean  "GroundLead"
+  create_table "rides", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.datetime "date"
+    t.datetime "launch_time"
+    t.string   "terrain",     limit: 255
+    t.string   "description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rider_id"
   end
 
-  create_table "pelotons", force: true do |t|
-    t.string   "PelName"
-    t.integer  "PelCaptainID"
-    t.string   "PelWeb"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "riders", force: true do |t|
-    t.string   "Name"
-    t.integer  "Age"
-    t.string   "Addr1"
-    t.string   "Addr2"
-    t.string   "City"
-    t.string   "State"
-    t.integer  "Zip"
-    t.string   "Region"
-    t.string   "Email"
-    t.integer  "Phone"
-    t.string   "Password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "api_key"
-  end
-
-  create_table "rides", force: true do |t|
-    t.string   "RideName"
-    t.integer  "RideSponsorId"
-    t.datetime "RideDate"
-    t.datetime "RideLaunchTime"
-    t.string   "RideTerrain"
-    t.integer  "RideLeader"
-    t.string   "Description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "rides", ["rider_id"], name: "index_rides_on_rider_id"
 
 end
