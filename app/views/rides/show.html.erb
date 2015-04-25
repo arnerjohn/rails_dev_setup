@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-lg-12">
 		<h1>Ride Details</h1>
-		<p>Ride Name:<%= @ride.RideName %></p>
-		<p>Ride Date: <%= @ride.RideDate %></p>
-		<p>Ride Sponsor ID: <%= @ride.RideSponsorId %></p>
-		<p>Ride Description: <%= @ride.Description %></p>
-		<p>Ride Terrain: <%= @ride.RideTerrain %></p>
+		<%= link_to "Edit Ride", edit_ride_path %>
+		<p>Ride Name:<%= @ride.name %></p>
+		<p>Ride Date: <%= @ride.date %></p>
+		<p>Ride Description: <%= @ride.description %></p>
+		<p>Ride Terrain: <%= @ride.terrain %></p>
 	</div>
 </div>
