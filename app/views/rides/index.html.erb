@@ -1,1 +1,11 @@
-This is the actual search page.
+<% @rides.each do |ride| %>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title"><%= ride.name %></h3>
+		</div>
+		<div class="panel-body">
+			<h4><%= ride.description %></h4>
+			<%= link_to "See More", ride, class: "btn btn-primary btn-raised pull-right" %>
+		</div>
+	</div>
+<% end %>
