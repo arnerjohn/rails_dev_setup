@@ -9,11 +9,13 @@ class ApplicationController < ActionController::Base
   private
 
   def restrict_access
-    unless restrict_access_by_header
-      render json: {message: 'Invalid API Token'}, status: 401
-      return
-    end
-    @rider = Rider.find(@api_key) if @api_key
+		if request.format == "application/json"
+			unless restrict_access_by_header
+				render json: {message: 'Invalid API Token'}, status: 401
+				return
+			end
+			@rider = Rider.find(@api_key) if @api_key
+		end
   end
 
   def restrict_access_by_header

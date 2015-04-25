@@ -8,3 +8,34 @@
 		<p>Ride Terrain: <%= @ride.terrain %></p>
 	</div>
 </div>
+<hr>
+<div class="row">
+	<div class="col-lg-12">
+		<% if current_rider %>
+			<% if !@ride.riders.map { |r| r.id }.include?(current_rider.id) %>
+				<%= form_tag({controller: "ride_participations", action: "create"}) do %>
+					<%= hidden_field_tag :rider_id, current_rider.id %>
+					<%= hidden_field_tag :ride_id, @ride.id %>
+
+					<%= submit_tag "Join Ride", class: "btn btn-primary" %>
+				<% end %>
+			<% else %>
+				<% participation_id = RideParticipation.where(rider_id: current_rider.id, ride_id: @ride.id).first.id %>
+				<%= link_to "Leave Ride", ride_participation_path(id: participation_id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+			<% end %>
+		<% else %>
+			<p>Create a Free Account to Join a Ride</p>
+			<%= link_to "Go to Sign Up", new_rider_registration_path, class: "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-12">
+		<h2>Riders</h2>
+		<% @ride.riders.each do |rider| %>
+			<p>Rider Email: <%= rider.email %></p>
+			<hr>
+		<% end %>
+	</div>
+</div>

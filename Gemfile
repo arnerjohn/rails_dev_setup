@@ -37,6 +37,8 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'bootstrap-material-design', git: 'https://github.com/tarebyte/bootstrap-material-design', branch: 'update_assets_to_latest_version'
 
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

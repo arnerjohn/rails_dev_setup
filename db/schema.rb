@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416010641) do
+ActiveRecord::Schema.define(version: 20150425201500) do
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token", limit: 255
-    t.string   "user_id",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "rider_id"
   end
 
   create_table "cycling_profiles", force: :cascade do |t|
@@ -62,21 +62,44 @@ ActiveRecord::Schema.define(version: 20150416010641) do
 
   add_index "pelotons", ["rider_id"], name: "index_pelotons_on_rider_id"
 
+  create_table "ride_participations", force: :cascade do |t|
+    t.integer  "rider_id"
+    t.integer  "ride_id"
+    t.string   "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ride_participations", ["ride_id"], name: "index_ride_participations_on_ride_id"
+  add_index "ride_participations", ["rider_id"], name: "index_ride_participations_on_rider_id"
+
   create_table "riders", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name",                   limit: 255
     t.integer  "age"
-    t.string   "address_1",  limit: 255
-    t.string   "address_2",  limit: 255
-    t.string   "city",       limit: 255
-    t.string   "state",      limit: 255
+    t.string   "address_1",              limit: 255
+    t.string   "address_2",              limit: 255
+    t.string   "city",                   limit: 255
+    t.string   "state",                  limit: 255
     t.integer  "zip_code"
-    t.string   "region",     limit: 255
-    t.string   "email",      limit: 255
+    t.string   "region",                 limit: 255
     t.integer  "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "api_key",    limit: 255
+    t.string   "api_key",                limit: 255
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",                 default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
+
+  add_index "riders", ["email"], name: "index_riders_on_email", unique: true
+  add_index "riders", ["reset_password_token"], name: "index_riders_on_reset_password_token", unique: true
 
   create_table "rides", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -86,9 +109,6 @@ ActiveRecord::Schema.define(version: 20150416010641) do
     t.string   "description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "rider_id"
   end
-
-  add_index "rides", ["rider_id"], name: "index_rides_on_rider_id"
 
 end
