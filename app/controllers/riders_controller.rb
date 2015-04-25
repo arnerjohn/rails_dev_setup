@@ -1,14 +1,20 @@
 class RidersController < ApplicationController
-  respond_to :json
+  # respond_to :json
   before_action :restrict_access, only: [:show, :update, :destroy]
-  #before_action :set_rider, only: [:show, :update, :destroy]
-  #before_action :authenticate, only: [:show, :update, :destroy]
+  # before_action :set_rider, only: [:show, :update, :destroy]
+  # before_action :authenticate, only: [:show, :update, :destroy]
 
   # GET /riders/1
   # GET /riders/1.json
   def show
-    #needs rider-permission for showing
-    respond_with @rider
+    # needs rider-permission for showing
+    # respond_with @rider
+		@rider = Rider.find(params[:id])
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @rider }
+		end
   end
 
   # POST /riders

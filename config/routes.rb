@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
-  root 'rides#index'
+  devise_for :riders
 
 	resources :rides
+	resources :riders
+	resources :ride_participations, only: [:create, :destroy]
 
   scope '/api/v1/' do
     #TODO need to change to specific verbs
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
     resources :emergency_contacts
   end
 
+  root 'rides#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

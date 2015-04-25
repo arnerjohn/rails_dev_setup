@@ -1,0 +1,12 @@
+<p><%= @rider.email %></p>
+<%= link_to "Sign Out", destroy_rider_session_path, method: :delete %>
+<hr>
+<h2>My Rides</h2>
+<% @rider.rides.each do |ride| %>
+	<div class="panel panel-default">
+		<div class="panel-heading"><%= ride.name %></div>
+		<div class="panel-body">
+			<%= ride.description %>
+		</div>
+	</div>
+<% end %>
